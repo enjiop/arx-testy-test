@@ -1,0 +1,18 @@
+// ==========================================================================
+// Base / Fonts
+// ==========================================================================
+
+@include font-face($font-roboto-regular, 'fonts/Roboto/Regular') {
+  font-style: normal;
+  font-weight: $normal;
+}
+
+@include font-face($font-stolzl-regular, 'fonts/Stolzl/Regular') {
+  font-style: normal;
+  font-weight: $normal;
+}
+
+@include font-face($font-stolzl-medium, 'fonts/Stolzl/Medium') {
+  font-style: normal;
+  font-weight: $medium;
+}

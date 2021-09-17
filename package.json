@@ -3,15 +3,37 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
+    "development": "cross-env NODE_ENV=development nuxt",
+    "dev": "npm run development",
+    "production": "cross-env NODE_ENV=production nuxt build",
+    "build": "nuxt run production",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "stylelint": "stylelint **/*.{css,vue}",
+    "stylelint:fix": "yarn stylelint --fix",
+    "eslint": "eslint --ext js,jsx,vue .",
+    "eslint:fix": "yarn eslint --fix"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.15.1",
+    "normalize.css": "^8.0.1",
     "nuxt": "^2.15.7",
     "storyblok-nuxt": "^2.0.1"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^6.0.1",
+    "@nuxtjs/stylelint-module": "^4.0.0",
+    "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^7.17.0",
+    "fibers": "^5.0.0",
+    "prettier": "^2.4.1",
+    "sass": "^1.41.1",
+    "sass-loader": "^10.2.0"
   }
 }

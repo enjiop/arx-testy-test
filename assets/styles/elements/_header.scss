@@ -1,0 +1,12 @@
+.c-header {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-left: rem(50px);
+  padding-right: rem(100px);
+  z-index: 2;
+}

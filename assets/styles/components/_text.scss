@@ -1,0 +1,22 @@
+.c-text {
+  font-family: $font-roboto-regular;
+  line-height: $line-height;
+
+  &.-t1 {
+    font-size: $font-size-t1;
+  }
+
+  &.-t2 {
+    font-size: $font-size-t2;
+  }
+
+  &.-t3 {
+    font-size: $font-size-t3;
+    line-height: $line-height-h;
+  }
+
+  &.-t4 {
+    font-size: $font-size-t4;
+    line-height: $line-height-h;
+  }
+}

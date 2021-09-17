@@ -1,0 +1,94 @@
+$button-underline-height: 2px;
+$button-underline-spacing: 2px;
+$button-bottom-spacing: 11px;
+$button-bottom-padding: $button-underline-height * 2 + $button-underline-spacing +
+  $button-bottom-spacing;
+$button-top-padding: 5px;
+$button-horizontal-padding: 20px;
+
+.c-button {
+  position: relative;
+  padding: rem($button-top-padding) rem($button-horizontal-padding)
+    rem($button-bottom-padding);
+  background-color: rgba(0, 0, 0, 0);
+  color: $color-main-dark-grey;
+  white-space: nowrap;
+}
+
+.c-button__text {
+  font-weight: $medium;
+  font-family: $font-stolzl-medium;
+  font-size: 14px;
+  line-height: $line-height;
+  margin-right: rem(40px);
+}
+
+.c-button__arrow {
+  stroke: $color-main-primary;
+}
+
+.c-button::before,
+.c-button::after {
+  content: '';
+  position: absolute;
+  display: block;
+  height: $button-underline-height;
+  width: 100%;
+  left: 0;
+  background-color: $color-main-primary;
+}
+
+.c-button::before {
+  bottom: ($button-underline-spacing + $button-underline-height);
+}
+
+.c-button::after {
+  bottom: 0;
+}
+
+.c-button::before,
+.c-button::after,
+.c-button__arrow {
+  transition: transform $speed $easing;
+}
+
+.c-button {
+  &:hover {
+    color: $color-main-dark-grey;
+
+    .c-button__arrow,
+    &::after {
+      transform: translateX(10px);
+    }
+
+    &::before {
+      transform: translateX(-10px);
+    }
+  }
+
+  @include u-actus {
+    color: $color-main-dark-grey;
+
+    &::after {
+      transform: translateY(
+        -$button-underline-spacing - $button-underline-spacing
+      );
+    }
+  }
+
+  &[aria-disabled],
+  &:disabled {
+    color: $color-main-dark-grey;
+    opacity: 0.2;
+    pointer-events: none;
+
+    .c-button__arrow {
+      stroke: $color-main-dark-grey;
+    }
+
+    &::before,
+    &::after {
+      background-color: $color-main-dark-grey;
+    }
+  }
+}
