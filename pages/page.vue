@@ -1,13 +1,16 @@
 <template>
   <div class="c-page">
     <base-header />
-    <base-aside />
+    <base-aside :page-title="blok.title" :blocks="blocks"/>
+    <main-menu />
     <main class="main">
-      <component
-        v-for="blok in blok.body"
-        :key="blok._uid"
-        :blok="blok"
-        :is="blok.component" />
+      <div class="o-container">
+        <content-block
+          v-for="block in blok.blocks"
+          :key="block._uuid"
+          :data="block"
+        />
+      </div>
     </main>
   </div>
 </template>
@@ -18,6 +21,18 @@ export default {
     blok: {
       type: Object,
       required: true
+    }
+  },
+
+  computed: {
+    blocks() {
+      const res = this.blok.blocks.map(({_uid, title}) => {
+        return {
+          _uid,
+          title,
+        }
+      });
+      return res
     }
   }
 }

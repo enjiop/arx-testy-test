@@ -1,7 +1,18 @@
 .c-aside {
   position: relative;
-  background-color: $color-main-dark-grey;
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  max-width: rem(650px);
+  width: rem(650px);
+  overflow: hidden;
+  background: $color-main-dark-grey url('/images/aside_bg.svg') left bottom
+    no-repeat;
+  padding: rem(170px) rem(50px) rem(50px);
+  color: $white;
   z-index: 1;
+}
+
+.c-aside .c-aside__title {
+  margin-bottom: rem(68px);
+  color: $color-main-primary;
 }

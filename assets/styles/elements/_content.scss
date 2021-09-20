@@ -1,0 +1,41 @@
+.c-content {
+  position: relative;
+  margin-bottom: rem(160px);
+}
+
+.c-content h2 {
+  margin-bottom: rem(40px);
+}
+
+.c-content h3 {
+  margin-bottom: rem(20px);
+}
+
+.c-content ul {
+  padding-left: 1rem;
+}
+
+.c-content ul li > * {
+  display: inline-block;
+}
+
+.c-content ul li::before {
+  content: '\2022';
+  color: $color-main-primary;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.c-content__body > * {
+  margin-bottom: rem(20px);
+}
+
+.c-content .c-content {
+  margin-bottom: rem(80px);
+}
+
+.c-button {
+  margin-top: rem(43px);
+}

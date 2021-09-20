@@ -1,6 +1,6 @@
 <template>
   <header class="c-header">
-      <a class="c-header__logo" href="#" aria-label="Arx. A 'FAIRFAX' company.">
+      <a class="c-header__logo" to="/" aria-label="Arx. A 'FAIRFAX' company.">
         <svg width="134" height="100">
           <use href="icons/sprite.svg#logo-red"></use>
         </svg>

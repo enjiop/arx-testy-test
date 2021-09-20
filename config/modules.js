@@ -3,7 +3,7 @@ export const modules = [
   [
     'storyblok-nuxt',
     {
-      accessToken: 'arbmc6gBAF9qZFjOkIuICgtt',
+      accessToken: 'ZxuUnJFWgtgnrWDLYbUYWQtt',
       cacheProvider: 'memory'
     }
   ],

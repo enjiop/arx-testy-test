@@ -7,6 +7,7 @@
     :href="to && !isInnerLink ? to : null"
     :target="target"
     :disabled="disabled"
+    :download="download"
   >
     <span class="c-button__text">
       {{ value }}
@@ -43,6 +44,11 @@ export default {
     isInnerLink: {
       type: Boolean,
       default: false
+    },
+
+    download: {
+      type: Boolean,
+      default: null
     }
   },
 

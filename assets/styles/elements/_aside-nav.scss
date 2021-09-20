@@ -1,0 +1,53 @@
+.c-aside-nav {
+  position: relative;
+  overflow-y: auto;
+}
+
+.c-aside-nav__list {
+  position: relative;
+  max-width: rem(408px);
+  // overflow: hidden;    
+}
+
+.c-aside-nav__item {
+  position: relative;
+  padding-left: rem(30px);
+
+  &:not(:last-child) {
+    margin-bottom: rem(20px);
+  }
+
+  @include u-hocus {
+    &,
+    &.-active {
+      .c-aside-nav__link {
+        transform: translateX(0px);
+      }
+
+      .c-aside-nav__arrow {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0px);
+      }
+    }
+  }
+}
+
+.c-aside-nav .c-aside-nav__link {
+  display: inline-block;
+  color: $white;
+  margin: 0;
+  transform: translateX(-#{rem(30px)});
+  transition: transform $speed $easing;
+}
+
+.c-aside-nav__arrow {
+  position: absolute;
+  display: inline-block;
+  top: rem(6px);
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-#{rem(10px)});
+  transition: transform $speed $easing, opacity $speed * 1.2 $easing;
+}
