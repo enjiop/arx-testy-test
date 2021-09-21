@@ -2,6 +2,10 @@
   position: relative;
   width: rem(40px);
   height: rem(40px);
+
+  &:focus {
+    outline: 3px solid currentColor;
+  }
 }
 
 $burger-line-height: 2px;

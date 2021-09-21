@@ -1,0 +1,49 @@
+.c-downloads {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: rem(16px);
+  column-gap: rem(16px);
+}
+
+.c-downloads__item {
+  position: relative;
+}
+
+.c-downloads__link {
+  display: flex;
+  align-items: center;
+  color: $color-main-dark-grey;
+  font-family: $font-stolzl-medium;
+  font-size: rem(14px);
+  line-height: 1;
+
+  @include u-hocus {
+    color: initial;
+    .c-downloads__name {
+      opacity: 0.5;
+    }
+    .c-downloads__ext {
+      opacity: 0.2;
+    }
+  }
+}
+
+.c-downloads__description {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  height: 100%;
+}
+
+.c-downloads__icon {
+  margin-right: rem(8px);
+}
+
+.c-downloads__name,
+.c-downloads__ext {
+  transition: opacity $speed $easing;
+}
+
+.c-downloads__ext {
+  opacity: 0.5;
+}

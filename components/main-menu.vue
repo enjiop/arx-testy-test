@@ -4,9 +4,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      isOpen: false
+  props: {
+    isOpen: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -26,22 +27,10 @@ export default {
     },
 
     open() {
-      let resolve
-      let reject
-
-      const promise = new Promise((ok, fail) => {
-        resolve = ok
-        reject = fail
-      })
-
-      this.$options.popupController = { resolve, reject }
       this.isOpen = true
-
-      return promise;
     },
 
     close() {
-      this.$options.popupController.resolve(true)
       this.isOpen = false
     }
   }

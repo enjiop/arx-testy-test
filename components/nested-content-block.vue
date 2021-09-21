@@ -1,16 +1,10 @@
 <template v-editable="data">
-  <div class="content">
-    <h2 class="c-heading -h3">{{ data.title }}</h2>
+  <div class="nested-content">
+    <h3 class="c-heading -h5">{{ data.title }}</h3>
 
-    <div class="content__body" v-if="body" v-html="body"></div>
+    <div class="nested-content__body" v-if="body" v-html="body"></div>
 
-    <nested-content-block
-      v-for="nested in data.nested"
-      :key="nested._uid"
-      :data="nested"
-    ></nested-content-block>
-
-    <downloads-component v-if="data.downloads.length" :downloads="data.downloads"></downloads-component>
+    <component v-for="block in data.blocks" :key="block._uid" :is="block.component" :data="block" />
 
     <base-button
       v-if="data.download && data.download.filename"
@@ -27,13 +21,13 @@ export default {
     data: {
       type: Object,
       required: true
-    },
+    }
   },
 
   computed: {
     body() {
       return this.$storyapi.richTextResolver.render(this.data.body)
-    },
+    }
   }
 }
 </script>

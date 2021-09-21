@@ -6,4 +6,6 @@
   </symbol>
   <symbol id="button-arrow" viewBox="0 0 13 9" fill="none"><path d="m7 .6 4 3.8-4 3.8M10 4.5H0" stroke-width="1.5"/></symbol>
   <symbol id="base-arrow" viewBox="0 0 16 12" fill="none"><path d="m8.85 1 5.06 4.78-5.06 4.77M12.65 5.92H0" stroke="#EF533F" stroke-width="2"/></symbol>
+  <symbol id="arrow" viewBox="0 0 9 14" fill="none"><path d="m1 1 6 6-6 6" stroke="#3D3935" stroke-width="2"/></symbol>
+  <symbol id="file" viewBox="0 0 48 48" fill="none"><path d="M29.5 4H10a2 2 0 0 0-2 2v35.5a2 2 0 0 0 2 2h27.5a2 2 0 0 0 2-2V14m-10-10 10 10m-10-10v8a2 2 0 0 0 2 2h8" stroke="#EF533F" stroke-width="3"/>/symbol>
 </svg>

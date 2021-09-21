@@ -1,11 +1,11 @@
 <template>
   <header class="c-header">
-      <a class="c-header__logo" to="/" aria-label="Arx. A 'FAIRFAX' company.">
+      <nuxt-link class="c-header__logo" to="/" aria-label="Arx. A 'FAIRFAX' company.">
         <svg width="134" height="100">
           <use href="icons/sprite.svg#logo-red"></use>
         </svg>
-      </a>
-      <button class="c-burger" @click="isActive = !isActive" :class="{'c-burger--active': isActive}" aria-label="Відкрити меню"></button>
+      </nuxt-link>
+      <button class="c-burger" @click="handleClick" :class="{'c-burger--active': isActive}" aria-label="Відкрити меню"></button>
   </header>
 </template>
 
@@ -16,5 +16,12 @@ export default {
       isActive: false
     }
   },
+
+  methods: {
+    handleClick() {
+      this.isActive = !this.isActive
+      this.$emit('toggle-menu')
+    }
+  }
 }
 </script>

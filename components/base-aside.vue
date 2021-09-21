@@ -1,13 +1,14 @@
 <template>
-  <div class="c-aside">
-    <h1 class="c-aside__title c-heading -h2">{{ pageTitle }}</h1>
-    <nav class="c-aside-nav">
-      <ul class="c-aside-nav__list">
-        <li v-for="block in blocks" :key="block._uuid" class="c-aside-nav__item">
-          <svg class="c-aside-nav__arrow" aria-hidden="true" width="16" height="12">
-            <use href="icons/sprite.svg#base-arrow"></use>
-          </svg>
-          <a class="c-aside-nav__link c-heading -h6" href="#">
+  <div class="aside" :class="{ 'aside--home': isHome }">
+    <h1 class="aside__title c-heading -h2">{{ pageTitle }}</h1>
+    <p v-if="description" class="aside__description c-text -t1">{{ description }}</p>
+    <nav v-if="blocks" class="aside-nav">
+      <ul class="aside-nav__list">
+        <li v-for="block in blocks" :key="block._uid" class="aside-nav__item">
+          <a class="aside-nav__link c-heading -h6" href="#">
+            <svg class="aside-nav__arrow" aria-hidden="true" width="16" height="12">
+              <use href="icons/sprite.svg#base-arrow"></use>
+            </svg>
             {{ block.title }}
           </a>
         </li>
@@ -27,6 +28,16 @@ export default {
     blocks: {
       type: Array,
       default: () => []
+    },
+
+    isHome: {
+      type: Boolean,
+      default: false
+    },
+
+    description: {
+      type: String,
+      default: ''
     }
   }
 }

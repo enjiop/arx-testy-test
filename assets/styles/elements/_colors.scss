@@ -1,0 +1,40 @@
+.colors {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: rem(30px);
+  row-gap: rem(30px);
+  width: 100%;
+}
+
+.colors__item {
+  position: relative;
+  display: flex;
+  padding: rem(15px);
+  border: 2px solid $color-main-grey-light;
+}
+
+.colors__item-info {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  color: $black;
+  padding-left: rem(27px);
+  font-family: $font-stolzl-medium;
+  font-size: rem(14px);
+  line-height: 1;
+}
+
+.colors__item-view {
+  width: rem(120px);
+  height: rem(120px);
+}
+
+.colors__item-name {
+  margin-bottom: rem(16px);
+}
+
+.colors__item-value {
+  opacity: 0.5;
+}

@@ -1,4 +1,4 @@
-.c-aside {
+.aside {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,17 @@
   z-index: 1;
 }
 
-.c-aside .c-aside__title {
+.aside .aside__title {
   margin-bottom: rem(68px);
   color: $color-main-primary;
+}
+
+.aside--home .aside__title {
+  margin-bottom: rem(52px);
+  max-width: rem(305px);
+  color: $white;
+}
+
+.aside--home .aside__description {
+  max-width: rem(395px);
 }

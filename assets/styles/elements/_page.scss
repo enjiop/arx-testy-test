@@ -66,10 +66,14 @@ html {
   text-shadow: none;
 }
 
-a {
+a:not([class]) {
   color: $link-color;
+  text-decoration: underline;
+  transition: opacity $speed $easing;
 
   @include u-hocus {
     color: $link-hover-color;
+    text-decoration: none;
+    opacity: 0.5;
   }
 }

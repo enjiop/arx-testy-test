@@ -11,6 +11,7 @@ $color-main-primary: #ef533f;
 $color-main-secondary: #3b92ff;
 $color-main-secondary-darker: #2f3293;
 $color-main-grey: #f7f8f9;
+$color-main-grey-light: #e5e5e5;
 $color-main-dark-grey: #3d3935;
 
 $color-services-casko: #594ece;
@@ -26,9 +27,8 @@ $color-services-gadget: #187686;
 // Specific
 // =============================================================================
 // Link
-$link-color: #1a0dab;
-$link-focus-color: #1a0dab;
-$link-hover-color: darken(#1a0dab, 10%);
+$link-color: $color-main-primary;
+$link-hover-color: darken($color-main-primary, 10%);
 // Selection
 $selection-text-color: $color-main-grey;
 $selection-background-color: $color-main-primary;
