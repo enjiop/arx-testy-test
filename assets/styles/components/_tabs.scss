@@ -1,0 +1,42 @@
+.c-tabs {
+  position: relative;
+  width: 100%;
+}
+
+.c-tabs__header {
+  position: relative;
+  display: flex;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+$tabs-underline-height: 5px;
+$tabs-switcher-pb: 26px;
+
+.c-tabs__item {
+  padding-bottom: rem($tabs-underline-height + $tabs-switcher-pb);
+
+  &.-active,
+  &:hover {
+    border-bottom: 5px solid $color-main-primary;
+  }
+
+  &:not(:first-child) {
+    margin-left: rem(60px);
+  }
+}
+
+.c-tabs__button {
+  font-family: $font-stolzl-medium;
+  font-size: rem(14px);
+  line-height: 1.7;
+  white-space: nowrap;
+
+  &:focus {
+    outline: auto;
+  }
+}
+
+.c-tabs__inner {
+  padding-top: rem(40px);
+}

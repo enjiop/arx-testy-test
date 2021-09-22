@@ -3,12 +3,13 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: rem(650px);
+  max-width: rem(650px);
   overflow: hidden;
   background: $color-main-dark-grey url('/images/aside_bg.svg') left bottom
     no-repeat;
   padding: rem(170px) rem(50px) rem(50px);
   color: $white;
+  overflow-y: auto;
   z-index: 1;
 }
 

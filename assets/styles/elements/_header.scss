@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding-left: rem(50px);
-  padding-right: rem(100px);
+  padding-left: rem($unit);
+  padding-right: rem($unit * 2);
   z-index: 2;
 }

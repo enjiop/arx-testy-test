@@ -18,11 +18,11 @@ html {
   -moz-osx-font-smoothing: grayscale;
 
   @media (max-width: $to-small) {
-    font-size: $font-size - 2px;
+    font-size: $font-size - 4px;
   }
 
   @media (min-width: $from-small) and (max-width: $to-medium) {
-    font-size: $font-size - 2px;
+    font-size: $font-size - 4px;
   }
 
   @media (min-width: $from-medium) and (max-width: $to-large) {

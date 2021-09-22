@@ -1,5 +1,5 @@
 <template v-editable="data">
-  <div class="nested-content">
+  <section class="nested-content">
     <h3 class="c-heading -h5">{{ data.title }}</h3>
 
     <div class="nested-content__body" v-if="body" v-html="body"></div>
@@ -12,7 +12,7 @@
       value="Завантажити"
       download
     />
-  </div>
+  </section>
 </template>
 
 <script>

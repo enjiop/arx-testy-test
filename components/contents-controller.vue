@@ -4,7 +4,7 @@
       ref="block"
       v-for="block in data"
       :key="block._uid"
-      :id="`block-${block._uid}`"
+      :id="`${block._uid}`"
       :data="block"
     />
   </div>
@@ -28,31 +28,78 @@ export default {
 
   watch: {
     blockInView() {
-      this.$emit('change', this.blockInView)
+      this.$emit('block-change', this.blockInView)
+    }
+  },
+
+  methods: {
+    updateHistory(hash) {
+      clearTimeout(this.updateHistory.timeout);
+      this.updateHistory.timeout = setTimeout(() => {
+        if (window.location.hash !== hash) {
+          history.pushState({}, window.title, hash);
+        }
+      }, 400);
     }
   },
 
   mounted() {
-    if (window && window.IntersectionObserver) {
-      const callback = (entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.intersectionRatio < 1) {
-            this.blockInView = entry.target
-          }
-        });
-      }
+    const sections = this.$refs.block.map(el => el.$el)
+    const scrollRoot = document.getElementById("main")
 
-      const options = {
-        rootMargin: '0px',
-        threshold: 1.0
-      }
+    let prevYPos = 0
+    let direction = 'up'
 
-      this.observer = new window.IntersectionObserver(callback, options)
+    const getTargetSection = (entry) => {
+      const index = sections.findIndex((section) => section == entry.target)
+
+      if (index >= sections.length - 1) {
+        return entry.target
+      } else {
+        return sections[index + 1]
+      }
     }
 
-    this.$refs.block.forEach(el => {
-      this.observer.observe(el.$el)
-    })
+    const shouldUpdate = (entry) => {
+      if (direction === 'down' && !entry.isIntersecting) {
+        return true
+      }
+
+      if (direction === 'up' && entry.isIntersecting) {
+        return true
+      }
+
+      return false
+    }
+
+    const callback = (entries) => {
+      entries.forEach(entry => {
+        if (scrollRoot.scrollTop > prevYPos) {
+          direction = 'down'
+        } else {
+          direction = 'up'
+        }
+
+        prevYPos = scrollRoot.scrollTop
+
+        const target = direction === 'down' ? getTargetSection(entry) : entry.target
+
+        if (shouldUpdate(entry)) {
+          this.blockInView = target.id;
+          this.updateHistory('#' + target.id)
+        }
+      });
+    }
+
+    const options = {
+      root: document.getElementById('main'),
+      rootMargin: '-100px',
+      threshold: 0
+    }
+
+    this.observer = new window.IntersectionObserver(callback, options)
+
+    sections.forEach(section => this.observer.observe(section))
   }
 }
 </script>
