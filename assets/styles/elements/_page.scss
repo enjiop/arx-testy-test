@@ -50,14 +50,11 @@ html {
   }
 }
 
-.c-page {
+body {
   position: relative;
-  display: grid;
-  grid-template-columns: rem(650px) 1fr;
   width: 100%;
-  height: 100vh;
   background-color: $white;
-  overflow: hidden;
+  padding-left: rem($aside-width);
 }
 
 ::selection {

@@ -1,45 +1,78 @@
 <template>
   <div class="c-tabs">
-    <ul class="c-tabs__header">
+    <ul role="tablist" class="c-tabs__header">
       <li
+        ref="tab"
         class="c-tabs__item"
-        :class="{ '-active': (selectedIndex === index) }"
-        v-for="(tab, index) in tabs"
+        v-for="tab in data.tabs"
         :key="tab.title"
+        :class="{ '-active': (selectedUid === tab._uid) }"
+        role="presentation"
       >
-        <button @click="selectTab(index)" class="c-tabs__button">
+        <button
+          role="tab"
+          class="c-tabs__button"
+          :id="`tab-${tab._uid}`"
+          :aria-selected="selectedUid === tab._uid"
+          :tabindex="selectedUid === tab._uid ? null : -1"
+          @click="selectTab(tab._uid)"
+          @keydown.prevent="handleTabKeyDown"
+        >
           {{ tab.title }}
         </button>
       </li>
     </ul>
-    <slot></slot>
+    <base-tabs-inner
+      ref="panel"
+      v-for="tab in data.tabs"
+      :key="tab._uid"
+      :id="`tab-${tab._uid}`"
+      :title="tab.title"
+      :data="tab"
+      :aria-labelledby="`tab-${tab._uid}`"
+      :isActive="selectedUid === tab._uid"
+      tabindex="-1"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      selectedIndex: 0,
-      tabs: []
+  props: {
+    data: {
+      type: Object,
+      required: true
     }
   },
 
-  created() {
-    this.tabs = this.$children
+  data() {
+    return {
+      selectedUid: '',
+    }
   },
 
   mounted() {
-    this.selectTab(0)
+    const firstTabUid = this.data.tabs[0]._uid;
+    this.selectTab(firstTabUid)
+  },
+
+  computed: {
+    currentPanelElement() {
+      return this.$refs.panel.find(item => item.$el.id === `tab-${this.selectedUid}`)
+    }
   },
 
   methods: {
-    selectTab(index) {
-      this.selectedIndex = index
+    selectTab(uid) {
+      this.selectedUid = uid
+    },
 
-      this.tabs.forEach((tab, i) => {
-        tab.isActive = (index === i)
-      })
+    handleTabKeyDown(e) {
+      let dir = e.which === 40 ? 'down' : null;
+      if (dir !== null) {
+        e.preventDefault();
+        dir === 'down' ? this.currentPanelElement.$el.focus() : void 0;
+      }
     }
   }
 }

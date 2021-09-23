@@ -25,4 +25,8 @@
   &.-h6 {
     font-size: rem($font-size-h6);
   }
+
+  &.-fancy > span {
+    color: $color-main-primary;
+  }
 }

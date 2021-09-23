@@ -1,5 +1,5 @@
 <template v-editable="data">
-  <section class="content">
+  <section class="content__section">
     <h2 class="c-heading -h3">{{ data.title }}</h2>
 
     <div class="content__body" v-if="body" v-html="body"></div>
@@ -10,10 +10,7 @@
         :key="nested._uid"
         :data="nested"
       ></nested-content-block>
-      <base-tabs :key="nested._uid" v-else-if="nested.component === 'Tabs'" >
-        <base-tabs-inner v-for="tab in nested.tabs" :key="tab._uid" :title="tab.title" :data="tab">
-        </base-tabs-inner>
-      </base-tabs>
+      <base-tabs :key="nested._uid" v-else-if="nested.component === 'Tabs'" :data="nested" />
     </template>
 
     <downloads-component v-if="data.downloads && data.downloads.length > 0" :downloads="data.downloads"></downloads-component>

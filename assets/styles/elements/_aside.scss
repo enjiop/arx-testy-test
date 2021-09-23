@@ -1,9 +1,11 @@
 .aside {
-  position: relative;
+  position: fixed;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  max-width: rem(650px);
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: rem($aside-width);
   overflow: hidden;
   background: $color-main-dark-grey url('/images/aside_bg.svg') left bottom
     no-repeat;

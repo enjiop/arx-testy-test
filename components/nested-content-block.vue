@@ -6,6 +6,8 @@
 
     <component v-for="block in data.blocks" :key="block._uid" :is="block.component" :data="block" />
 
+    <downloads-component v-if="data.downloads && data.downloads.length > 0" :downloads="data.downloads"></downloads-component>
+
     <base-button
       v-if="data.download && data.download.filename"
       :to="data.download.filename"

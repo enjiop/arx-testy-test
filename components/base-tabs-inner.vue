@@ -1,6 +1,6 @@
 <template>
-  <div class="c-tabs__inner" v-show="isActive" v-html="body">
-  </div>
+  <section role="tabpanel" class="c-tabs__inner" v-show="isActive" v-html="body">
+  </section>
 </template>
 
 <script>
@@ -14,12 +14,11 @@ export default {
     data: {
       type: Object,
       required: true
-    }
-  },
+    },
 
-  data() {
-    return {
-      isActive: true
+    isActive: {
+      type: Boolean,
+      required: true
     }
   },
 

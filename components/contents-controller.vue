@@ -1,5 +1,5 @@
 <template>
-  <div class="o-container">
+  <div class="o-container content">
     <content-block
       ref="block"
       v-for="block in data"
@@ -45,7 +45,6 @@ export default {
 
   mounted() {
     const sections = this.$refs.block.map(el => el.$el)
-    const scrollRoot = document.getElementById("main")
 
     let prevYPos = 0
     let direction = 'up'
@@ -74,13 +73,13 @@ export default {
 
     const callback = (entries) => {
       entries.forEach(entry => {
-        if (scrollRoot.scrollTop > prevYPos) {
+        if (document.documentElement.scrollTop > prevYPos) {
           direction = 'down'
         } else {
           direction = 'up'
         }
 
-        prevYPos = scrollRoot.scrollTop
+        prevYPos = window.scrollTop
 
         const target = direction === 'down' ? getTargetSection(entry) : entry.target
 
@@ -92,9 +91,8 @@ export default {
     }
 
     const options = {
-      root: document.getElementById('main'),
-      rootMargin: '-100px',
-      threshold: 0
+      rootMargin: "-30%",
+      threshold: 0.0
     }
 
     this.observer = new window.IntersectionObserver(callback, options)
