@@ -22,17 +22,17 @@
         </button>
       </li>
     </ul>
-    <base-tabs-inner
-      ref="panel"
-      v-for="tab in data.tabs"
-      :key="tab._uid"
-      :id="`tab-${tab._uid}`"
-      :title="tab.title"
-      :data="tab"
-      :aria-labelledby="`tab-${tab._uid}`"
-      :isActive="selectedUid === tab._uid"
-      tabindex="-1"
-    />
+      <base-tabs-inner
+        ref="panel"
+        v-for="tab in data.tabs"
+        :key="tab._uid"
+        :id="`tab-${tab._uid}`"
+        :title="tab.title"
+        :data="tab"
+        :aria-labelledby="`tab-${tab._uid}`"
+        :isActive="selectedUid === tab._uid"
+        tabindex="-1"
+      />
   </div>
 </template>
 

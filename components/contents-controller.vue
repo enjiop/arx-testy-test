@@ -44,6 +44,7 @@ export default {
   },
 
   mounted() {
+    if (!this.$refs.block) return;
     const sections = this.$refs.block.map(el => el.$el)
 
     let prevYPos = 0

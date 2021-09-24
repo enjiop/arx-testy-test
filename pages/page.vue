@@ -1,32 +1,53 @@
 <template>
   <div class="page" :class="{ '-is-disabled': isMenuOpen }">
     <base-header @toggle-menu="toggleMenu"/>
-    <base-aside
-      :isHome="blok.component === 'home_page'"
-      :page-title="blok.title"
-      :blocks="blocks"
-      :description="blok.description"
-      :current-block-uid="currentBlockId"
-    />
-    <main-menu ref="menu" :isOpen="isMenuOpen" :data="contentPages"/>
-    <main class="main" id="main">
-        <home-content
-          v-if="blok.component === 'home_page'"
-          :data="contentPages"
-        />
-        <contents-controller v-else-if="blok.blocks" :data="blok.blocks" @block-change="handleContentChange" />
-    </main>
+    <mobile-overlay v-if="isMobile"></mobile-overlay>
+
+    <template v-else>
+      <button
+        class="c-burger"
+        :aria-expanded="isMenuOpen"
+        aria-controls="main-menu"
+        :class="{'c-burger--active': isMenuOpen}"
+        @click="toggleMenu"
+        aria-label="Відкрити меню"
+      ></button>
+
+      <base-aside
+        :isHome="blok.component === 'home_page'"
+        :page-title="blok.title || ''"
+        :blocks="blocks"
+        :description="blok.description"
+        :current-block-uid="currentBlockId"
+      />
+      <main-menu ref="menu" :isOpen="isMenuOpen" :data="contentPages"/>
+      <main class="main" id="main">
+          <home-content
+            v-if="blok.component === 'home_page'"
+            :data="contentPages"
+          />
+          <contents-controller v-else-if="blok.blocks" :data="blok.blocks" @block-change="handleContentChange" />
+      </main>
+    </template>
   </div>
 </template>
 
 <script>
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock"
+import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
 export default {
+  head() {
+    return this.blok && {
+      title: this.blok.title
+    }
+  },
+
   data() {
     return {
+      MOBILE_BRAKEPOINT: 1201,
       isMenuOpen: false,
       currentBlockId: '',
+      isMobile: false,
     }
   },
 
@@ -42,10 +63,10 @@ export default {
   },
 
   watch: {
-    "$route.hash"() {
+    $route() {
       this.isMenuOpen = false
       clearAllBodyScrollLocks()
-    }
+    },
   },
 
   computed: {
@@ -69,22 +90,50 @@ export default {
   methods: {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen
-
-      if (this.isMenuOpen) {
-        disableBodyScroll(this.$refs.menu.$el)
-      } else {
-        enableBodyScroll(this.$refs.menu.$el)
-      }
     },
 
     handleContentChange(id) {
       if (!id) return ''
       this.currentBlockId = id
+    },
+
+    mobileDetection() {
+      this.isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+            (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ||
+            window.innerWidth < this.MOBILE_BRAKEPOINT;
+    },
+
+    handleResize() {
+      clearTimeout(this.handleResize.timeout)
+      this.handleResize.timeout = setTimeout(() => {
+        this.mobileDetection()
+      }, 300)
+    },
+
+    handleKeydown(e) {
+      if (this.isMenuOpen && e.key === "Escape") {
+        this.toggleMenu()
+      }
+    },
+  },
+
+  mounted() {
+    if (window && document) {
+      this.mobileDetection()
+      window.addEventListener("resize", this.handleResize)
+      document.addEventListener("keydown", this.handleKeydown)
     }
   },
 
   beforeDestroy() {
     clearAllBodyScrollLocks()
+  },
+
+  beforeUnmount() {
+    if (window && document) {
+      window.removeEventListener("resize", this.handleResize)
+      document.removeEventListener("keydown", this.handleKeydown)
+    }
   }
 }
 </script>

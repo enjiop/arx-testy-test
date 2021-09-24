@@ -37,6 +37,7 @@
 @import 'elements/home-nav';
 @import 'elements/content';
 @import 'elements/colors';
+@import 'elements/mobile-overlay';
 
 // Objects
 // ==========================================================================
@@ -61,7 +62,8 @@
 
 // Transitions
 // ==========================================================================
-@import 'transitions/menu';
+@import 'transitions/page';
+@import 'transitions/tabs';
 
 // Utilities
 // ==========================================================================

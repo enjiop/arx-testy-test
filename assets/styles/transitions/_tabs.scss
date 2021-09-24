@@ -1,0 +1,28 @@
+.tabs-enter-active,
+.tabs-leave-active {
+  display: inline-block;
+  transition: transform $speed * 2 $easing, opacity $speed * 3 $easing;
+}
+
+.tabs-leave-active {
+  position: absolute;
+  transition-delay: $speed;
+}
+
+.tabs-enter {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.tabs-enter-to {
+  transform: translateX(0px);
+}
+
+.tabs-leave {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+.tabs-leave-to {
+  transform: translateX(0px);
+}

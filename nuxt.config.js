@@ -1,4 +1,4 @@
-import { head, css, plugins, components, buildModules, modules, build } from './config'
+import { head, css, plugins, components, buildModules, modules, build, transition, loading } from './config'
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -15,6 +15,10 @@ export default {
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components,
+
+  transition,
+
+  loading,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules,

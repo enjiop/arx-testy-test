@@ -5,5 +5,17 @@ import { components } from './components'
 import { buildModules } from './buildModules'
 import { modules } from './modules'
 import { build } from './build'
+import { transition } from './transition'
+import { loading } from './loading'
 
-export { head, css, plugins, components, buildModules, modules, build }
+export {
+  head,
+  css,
+  plugins,
+  components,
+  buildModules,
+  modules,
+  build,
+  transition,
+  loading
+}

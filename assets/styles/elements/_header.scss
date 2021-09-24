@@ -9,4 +9,11 @@
   padding-left: rem($unit);
   padding-right: rem($unit * 2);
   z-index: 2;
+
+  @media (max-width: $to-large) {
+    justify-content: center;
+    padding-left: rem(35px);
+    padding-right: rem(35px);
+    z-index: 100;
+  }
 }

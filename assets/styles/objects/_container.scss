@@ -18,4 +18,14 @@
   padding-right: rem($padding);
   padding-left: rem($padding);
   max-width: rem($container-width + ($padding * 2));
+
+  @media (max-width: $to-small) {
+    padding-left: rem($padding - 15px);
+    padding-right: rem($padding - 15px);
+  }
+
+  @media (min-width: $from-small) and (max-width: $to-large) {
+    padding-left: rem($padding - 10px);
+    padding-right: rem($padding - 10px);
+  }
 }

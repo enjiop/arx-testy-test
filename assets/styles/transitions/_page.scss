@@ -1,0 +1,40 @@
+.page-enter-active,
+.page-leave-active {
+  transition-duration: $speed * 3;
+  .content,
+  .home-nav__list,
+  .home-nav__title,
+  .aside__title,
+  .aside__description,
+  .aside-nav {
+    transition: opacity $speed * 2 $easing;
+  }
+
+  .content,
+  .home-nav__list,
+  .home-nav__title {
+    transition-delay: math.div($speed, 2);
+  }
+}
+
+.page-enter {
+  .content,
+  .home-nav__list,
+  .aside__title,
+  .aside__description,
+  .aside-nav,
+  .home-nav__title {
+    opacity: 0;
+  }
+}
+
+.page-leave-to {
+  .content,
+  .home-nav__title,
+  .aside__title,
+  .aside__description,
+  .aside-nav,
+  .home-nav__list {
+    opacity: 0;
+  }
+}

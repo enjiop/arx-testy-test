@@ -7,8 +7,8 @@
     @leave="onLeave"
     @after-leave="onAfterLeave"
   >
-    <div v-show="isOpen" class="main-menu">
-      <div class="main-menu__wrapper">
+    <div v-show="isOpen" id="main-menu" class="main-menu">
+      <div class="main-menu__wrapper" tabindex="-1">
         <ul class="main-menu__page-list" v-for="block in data" :key="block._uid">
           <li class="main-menu__page-item">
             <nuxt-link class="main-menu__page-link" :to="block.slug">
@@ -31,6 +31,8 @@
 
 <script>
 import { gsap } from "gsap"
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock"
+
 
 export default {
   props: {
@@ -47,27 +49,15 @@ export default {
 
   data() {
     return {
-      tl: null
+      tl: null,
     }
   },
 
-  mounted() {
-    document.addEventListener("keydown", this.handleKeydown)
-  },
-
-  beforeUnmount() {
-    document.removeEventListener("keydown", this.handleKeydown)
-  },
-
   methods: {
-    handleKeydown(e) {
-      if (this.isOpen && e.key === "Escape") {
-        this.close()
-      }
-    },
-
     onBeforeEnter(el) {
       if (!process.client) return;
+
+      disableBodyScroll(el)
       this.tl = gsap.timeline({ paused: true })
 
       this.tl
@@ -91,12 +81,17 @@ export default {
       if (!this.tl) return;
       this.tl.eventCallback('onComplete', done)
       this.tl.timeScale(2).reverse()
+      setTimeout(() => { enableBodyScroll(el) }, 2000)
     },
 
     onAfterLeave() {
       if (!this.tl) return;
       this.tl.eventCallback('onComplete', null)
     }
+  },
+
+  beforeUnmount() {
+    clearAllBodyScrollLocks()
   }
 }
 </script>

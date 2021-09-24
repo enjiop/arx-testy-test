@@ -1,0 +1,17 @@
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: $color-main-dark-grey url('/images/aside_bg.svg') left bottom
+    no-repeat;
+  // z-index: 99;
+  color: $white;
+  padding-top: max(19.36vh, #{rem(110px)});
+  text-align: center;
+}
+
+.mobile-overlay__title {
+  margin-bottom: rem(20px);
+}

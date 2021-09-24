@@ -1,6 +1,8 @@
 <template>
-  <section role="tabpanel" class="c-tabs__inner" v-show="isActive" v-html="body">
-  </section>
+  <transition name="tabs" mode="out-in">
+    <section role="tabpanel" class="c-tabs__inner" v-show="isActive" v-html="body">
+    </section>
+  </transition>
 </template>
 
 <script>

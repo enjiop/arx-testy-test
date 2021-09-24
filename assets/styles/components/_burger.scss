@@ -1,7 +1,10 @@
 .c-burger {
-  position: relative;
+  position: fixed;
   width: rem(40px);
   height: rem(40px);
+  left: calc(100vw - #{rem(100px)});
+  top: rem(37px);
+  z-index: 100;
 
   &:focus {
     outline: 3px solid currentColor;
