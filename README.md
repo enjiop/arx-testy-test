@@ -1,5 +1,13 @@
 # arx-design
 
+## Requirements
+
+| Name   | Version |
+| ------ | ------- |
+| [Node] | > 14.17 |
+
+[node]: https://nodejs.org/en/
+
 ## Build Setup
 
 ```bash
@@ -18,6 +26,35 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+
+## Styles
+
+[Sass](https://github.com/sass/node-sass) is our CSS preprocessor. [Autoprefixer](https://github.com/postcss/autoprefixer) is also included.
+
+#### Architecture
+
+[ITCSS](https://github.com/itcss) is our CSS architecture.
+
+- `settings`: Global variables, site-wide settings, config switches, etc.
+- `tools`: Site-wide mixins and functions.
+- `generic`: Low-specificity, far-reaching rulesets (e.g. resets).
+- `elements`: Unclassed HTML elements (e.g. `a {}`, `blockquote {}`, `address {}`).
+- `objects`: Objects, abstractions, and design patterns (e.g. `.o-layout {}`).
+- `components`: Discrete, complete chunks of UI (e.g. `.c-carousel {}`).
+- `utilities`: High-specificity, very explicit selectors. Overrides and helper
+  classes (e.g. `.u-hidden {}`)
+
+#### Namespaces
+
+We namespace our classes for more [transparency](https://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/).
+
+- `o-`: Object that it may be used in any number of unrelated contexts to the one you can currently see it in. Making modifications to these types of class could potentially have knock-on effects in a lot of other unrelated places.
+- `c-`: Component is a concrete, implementation-specific piece of UI. All of the changes you make to its styles should be detectable in the context you’re currently looking at. Modifying these styles should be safe and have no side effects.
+- `u-`: Utility has a very specific role (often providing only one declaration) and should not be bound onto or changed. It can be reused and is not tied to any specific piece of UI.
+- `s-`: Scope creates a new styling context. Similar to a Theme, but not necessarily cosmetic, these should be used sparingly—they can be open to abuse and lead to poor CSS if not used wisely.
+- `is-`, `has-`: Is currently styled a certain way because of a state or condition. It tells us that the DOM currently has a temporary, optional, or short-lived style applied to it due to a certain state being invoked.
+
+[_source_](https://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/#the-namespaces)
 
 ## Special Directories
 
@@ -40,7 +77,6 @@ More information about the usage of this directory in [the documentation](https:
 Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
 
 ### `pages`
 
