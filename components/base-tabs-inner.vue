@@ -1,7 +1,11 @@
 <template>
   <transition name="tabs" mode="out-in">
-    <section role="tabpanel" class="c-tabs__inner" v-show="isActive" v-html="body">
-    </section>
+    <section
+      v-show="isActive"
+      role="tabpanel"
+      class="c-tabs__inner"
+      v-html="body"
+    ></section>
   </transition>
 </template>
 
@@ -10,24 +14,24 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Tab'
+      default: 'Tab',
     },
 
     data: {
       type: Object,
-      required: true
+      required: true,
     },
 
     isActive: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
 
   computed: {
-   body() {
-     return this.$storyapi.richTextResolver.render(this.data.body)
-   }
-  }
+    body() {
+      return this.$storyapi.richTextResolver.render(this.data.body)
+    },
+  },
 }
 </script>

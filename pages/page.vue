@@ -1,6 +1,6 @@
 <template>
   <div class="page" :class="{ '-is-disabled': isMenuOpen }">
-    <base-header @toggle-menu="toggleMenu"/>
+    <base-header @toggle-menu="toggleMenu" />
     <mobile-overlay v-if="isMobile"></mobile-overlay>
 
     <template v-else>
@@ -8,38 +8,47 @@
         class="c-burger"
         :aria-expanded="isMenuOpen"
         aria-controls="main-menu"
-        :class="{'c-burger--active': isMenuOpen}"
-        @click="toggleMenu"
+        :class="{ 'is-active': isMenuOpen }"
         aria-label="Відкрити меню"
+        @click="toggleMenu"
       ></button>
 
       <base-aside
-        :isHome="blok.component === 'home_page'"
+        :is-home="blok.component === 'home_page'"
         :page-title="blok.title || ''"
         :blocks="blocks"
         :description="blok.description"
         :current-block-uid="currentBlockId"
       />
-      <main-menu ref="menu" :isOpen="isMenuOpen" :data="contentPages"/>
-      <main class="main" id="main">
-          <home-content
-            v-if="blok.component === 'home_page'"
-            :data="contentPages"
-          />
-          <contents-controller v-else-if="blok.blocks" :data="blok.blocks" @block-change="handleContentChange" />
+      <main-menu ref="menu" :is-open="isMenuOpen" :data="contentPages" />
+      <main id="main" class="main">
+        <home-content
+          v-if="blok.component === 'home_page'"
+          :data="contentPages"
+        />
+        <contents-controller
+          v-else-if="blok.blocks"
+          :data="blok.blocks"
+          @block-change="handleContentChange"
+        />
       </main>
     </template>
   </div>
 </template>
 
 <script>
-import { clearAllBodyScrollLocks } from "body-scroll-lock"
+import { clearAllBodyScrollLocks } from 'body-scroll-lock'
 
 export default {
-  head() {
-    return this.blok && {
-      title: this.blok.title
-    }
+  props: {
+    blok: {
+      type: Object,
+      required: true,
+    },
+    stories: {
+      type: Array,
+      required: true,
+    },
   },
 
   data() {
@@ -50,16 +59,30 @@ export default {
       isMobile: false,
     }
   },
+  head() {
+    return (
+      this.blok && {
+        title: this.blok.title,
+      }
+    )
+  },
 
-  props: {
-    blok: {
-      type: Object,
-      required: true
+  computed: {
+    blocks() {
+      if (!this.blok.blocks) return []
+      const res = this.blok.blocks.map(({ _uid, title }) => ({ _uid, title }))
+      return res
     },
-    stories: {
-      type: Array,
-      required: true
-    }
+
+    contentPages() {
+      const res = []
+      this.stories.forEach((item) => {
+        if (item.content.component === 'page') {
+          res.push(item)
+        }
+      })
+      return res
+    },
   },
 
   watch: {
@@ -69,22 +92,19 @@ export default {
     },
   },
 
-  computed: {
-    blocks: function() {
-      if (!this.blok.blocks) return [];
-      const res = this.blok.blocks.map(({ _uid, title }) => ({ _uid, title}));
-      return res
-    },
+  mounted() {
+    this.mobileDetection()
+    window.addEventListener('resize', this.handleResize)
+    document.addEventListener('keydown', this.handleKeydown)
+  },
 
-    contentPages: function() {
-      let res = []
-      this.stories.forEach(item => {
-        if (item.content.component === 'page') {
-          res.push(item)
-        }
-      })
-      return res
-    }
+  beforeDestroy() {
+    clearAllBodyScrollLocks()
+  },
+
+  beforeUnmount() {
+    window.removeEventListener('resize', this.handleResize)
+    document.removeEventListener('keydown', this.handleKeydown)
   },
 
   methods: {
@@ -98,9 +118,12 @@ export default {
     },
 
     mobileDetection() {
-      this.isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-            (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ||
-            window.innerWidth < this.MOBILE_BRAKEPOINT;
+      this.isMobile =
+        /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        ) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ||
+        window.innerWidth < this.MOBILE_BRAKEPOINT
     },
 
     handleResize() {
@@ -111,25 +134,10 @@ export default {
     },
 
     handleKeydown(e) {
-      if (this.isMenuOpen && e.key === "Escape") {
+      if (this.isMenuOpen && e.key === 'Escape') {
         this.toggleMenu()
       }
     },
   },
-
-  mounted() {
-    this.mobileDetection()
-    window.addEventListener("resize", this.handleResize)
-    document.addEventListener("keydown", this.handleKeydown)
-  },
-
-  beforeDestroy() {
-    clearAllBodyScrollLocks()
-  },
-
-  beforeUnmount() {
-    window.removeEventListener("resize", this.handleResize)
-    document.removeEventListener("keydown", this.handleKeydown)
-  }
 }
 </script>

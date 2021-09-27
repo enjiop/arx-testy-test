@@ -16,6 +16,15 @@
   margin-bottom: rem(20px);
 }
 
+.content__body > * {
+  margin-bottom: rem(20px);
+}
+
+.content > .content__body > *,
+.nested-content > .nested-content__body > * {
+  margin-bottom: rem(20px);
+}
+
 .content ul:not([class]) {
   padding-left: 1rem;
 }
@@ -37,21 +46,8 @@
   margin-left: -1em;
 }
 
-.content__body > * {
-  margin-bottom: rem(20px);
-}
-
-.content .content {
-  margin-bottom: rem(80px);
-}
-
 .nested-content {
   margin-top: rem(80px);
-}
-
-.content > .content__body > *,
-.nested-content > .nested-content__body > * {
-  margin-bottom: rem(20px);
 }
 
 .content .c-button {

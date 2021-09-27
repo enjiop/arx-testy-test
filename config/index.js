@@ -17,5 +17,5 @@ export {
   modules,
   build,
   transition,
-  loading
+  loading,
 }

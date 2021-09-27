@@ -1,7 +1,7 @@
 <template>
   <component
-    class="c-button"
     :is="type"
+    class="c-button"
     :aria-disabled="disabled"
     :to="to && isInnerLink ? to : null"
     :href="to && !isInnerLink ? to : null"
@@ -23,47 +23,47 @@ export default {
   props: {
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     value: {
       type: String,
-      required: true
+      required: true,
     },
 
     to: {
       type: String,
-      default: ''
+      default: '',
     },
 
     target: {
       type: String,
-      default: null
+      default: null,
     },
 
     isInnerLink: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     download: {
       type: Boolean,
-      default: null
-    }
+      default: null,
+    },
   },
 
   computed: {
     type() {
       if (this.to) {
         if (this.isInnerLink) {
-          return "nuxt-link"
+          return 'nuxt-link'
         } else {
-          return "a"
+          return 'a'
         }
       }
 
-      return "button";
-    }
-  }
+      return 'button'
+    },
+  },
 }
 </script>

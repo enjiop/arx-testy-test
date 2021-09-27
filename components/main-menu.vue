@@ -9,16 +9,34 @@
   >
     <div v-show="isOpen" id="main-menu" class="main-menu">
       <div class="main-menu__wrapper" tabindex="-1">
-        <ul class="main-menu__page-list" v-for="block in data" :key="block._uid">
+        <ul
+          v-for="block in data"
+          :key="block._uid"
+          class="main-menu__page-list"
+        >
           <li class="main-menu__page-item">
             <nuxt-link class="main-menu__page-link" :to="block.slug">
-              <h2 ref="pageTitle" class="main-menu__page-title c-heading -h3">{{ block.name }}</h2>
+              <h2 ref="pageTitle" class="main-menu__page-title c-heading -h3">
+                {{ block.name }}
+              </h2>
             </nuxt-link>
 
             <ul class="main-menu__block-list">
-              <li class="main-menu__block-item" v-for="inner in block.content.blocks" :key="inner._uid">
-                <nuxt-link class="main-menu__block-link" :to="{ path: block.slug, hash: `#${inner._uid}` }">
-                  <h3 ref="blockTitle" class="main-menu__block-title c-heading -h6">{{ inner.title }}</h3>
+              <li
+                v-for="inner in block.content.blocks"
+                :key="inner._uid"
+                class="main-menu__block-item"
+              >
+                <nuxt-link
+                  class="main-menu__block-link"
+                  :to="{ path: block.slug, hash: `#${inner._uid}` }"
+                >
+                  <h3
+                    ref="blockTitle"
+                    class="main-menu__block-title c-heading -h6"
+                  >
+                    {{ inner.title }}
+                  </h3>
                 </nuxt-link>
               </li>
             </ul>
@@ -30,21 +48,24 @@
 </template>
 
 <script>
-import { gsap } from "gsap"
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock"
-
+import { gsap } from 'gsap'
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from 'body-scroll-lock'
 
 export default {
   props: {
     isOpen: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     data: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
 
   data() {
@@ -53,45 +74,60 @@ export default {
     }
   },
 
+  beforeUnmount() {
+    clearAllBodyScrollLocks()
+  },
+
   methods: {
     onBeforeEnter(el) {
-      if (!process.client) return;
+      if (!process.client) return
 
       disableBodyScroll(el)
       this.tl = gsap.timeline({ paused: true })
 
       this.tl
         .fromTo(this.$el, 0.7, { opacity: 1, yPercent: -100 }, { yPercent: 0 })
-        .staggerFromTo('.main-menu__page-title', 0.7, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, 0.2)
-        .staggerFromTo('.main-menu__block-title', 0.7, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, 0.08, "-=0.7")
+        .staggerFromTo(
+          '.main-menu__page-title',
+          0.7,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0 },
+          0.2
+        )
+        .staggerFromTo(
+          '.main-menu__block-title',
+          0.7,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0 },
+          0.08,
+          '-=0.7'
+        )
     },
 
     onEnter(el, done) {
-      if (!this.tl) return;
+      if (!this.tl) return
       this.tl.eventCallback('onComplete', done)
       this.tl.timeScale(1).play()
     },
 
     onAfterEnter() {
-      if (!this.tl) return;
+      if (!this.tl) return
       this.tl.eventCallback('onComplete', null)
     },
 
     onLeave(el, done) {
-      if (!this.tl) return;
+      if (!this.tl) return
       this.tl.eventCallback('onComplete', done)
       this.tl.timeScale(2).reverse()
-      setTimeout(() => { enableBodyScroll(el) }, 2000)
+      setTimeout(() => {
+        enableBodyScroll(el)
+      }, 2000)
     },
 
     onAfterLeave() {
-      if (!this.tl) return;
+      if (!this.tl) return
       this.tl.eventCallback('onComplete', null)
-    }
+    },
   },
-
-  beforeUnmount() {
-    clearAllBodyScrollLocks()
-  }
 }
 </script>

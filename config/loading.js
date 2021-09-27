@@ -1,1 +1,1 @@
-export const loading = false;
+export const loading = false

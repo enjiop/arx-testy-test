@@ -1,4 +1,14 @@
-import { head, css, plugins, components, buildModules, modules, build, transition, loading } from './config'
+import {
+  head,
+  css,
+  plugins,
+  components,
+  buildModules,
+  modules,
+  build,
+  transition,
+  loading,
+} from './config'
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target

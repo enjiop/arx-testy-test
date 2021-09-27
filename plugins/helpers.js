@@ -1,4 +1,4 @@
-const uniqId = () => Math.random().toString(36).substr(2, 9);
+const uniqId = () => Math.random().toString(36).substr(2, 9)
 
 // Clamps a value between an upper and lower bound
 const clamp = (num, min, max) => (num <= min ? min : num >= max ? max : num)

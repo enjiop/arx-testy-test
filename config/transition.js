@@ -1,4 +1,4 @@
 export const transition = {
-  name: "page",
-  mode: "out-in"
+  name: 'page',
+  mode: 'out-in',
 }

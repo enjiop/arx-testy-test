@@ -2,7 +2,11 @@
   <nav class="home-nav">
     <div class="home-nav__wrapper">
       <div class="o-container">
-        <fancy-text class="home-nav__title c-heading -h3" tag="h2" value="Будуємо чудові продукти"></fancy-text>
+        <fancy-text
+          class="home-nav__title c-heading -h3"
+          tag="h2"
+          value="Будуємо чудові продукти"
+        ></fancy-text>
         <ul class="home-nav__list">
           <home-nav-item
             v-for="page in data"
@@ -22,20 +26,20 @@ export default {
   props: {
     data: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
 
   computed: {
     contentPages() {
-      let res = []
-      this.nav.forEach(item => {
+      const res = []
+      this.nav.forEach((item) => {
         if (item.content.component === 'page') {
           res.push(item)
         }
       })
       return res
-    }
-  }
+    },
+  },
 }
 </script>

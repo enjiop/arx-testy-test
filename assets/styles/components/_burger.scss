@@ -1,3 +1,8 @@
+$burger-line-height: 2px;
+$burger-lines-spacing: 20px;
+
+$burger-initial-shift: math.div($burger-lines-spacing, 2);
+
 .c-burger {
   position: fixed;
   width: rem(40px);
@@ -9,35 +14,28 @@
   &:focus {
     outline: 3px solid currentColor;
   }
-}
 
-$burger-line-height: 2px;
-$burger-lines-spacing: 20px;
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: $burger-line-height;
+    top: calc(50% - math.div($burger-line-height, 2));
+    background-color: $color-main-dark-grey;
+    transition: transform $speed $easing;
+    pointer-events: none;
+  }
 
-.c-burger::before,
-.c-burger::after {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: $burger-line-height;
-  top: calc(50% - math.div($burger-line-height, 2));
-  background-color: $color-main-dark-grey;
-  transition: transform $speed $easing;
-  pointer-events: none;
-}
+  &::before {
+    transform: translateY($burger-initial-shift);
+  }
 
-$burger-initial-shift: math.div($burger-lines-spacing, 2);
+  &::after {
+    transform: translateY(-$burger-initial-shift);
+  }
 
-.c-burger::before {
-  transform: translateY($burger-initial-shift);
-}
-
-.c-burger::after {
-  transform: translateY(-$burger-initial-shift);
-}
-
-.c-burger {
   &:hover {
     &::before {
       transform: translate(10px, $burger-initial-shift);
@@ -47,13 +45,13 @@ $burger-initial-shift: math.div($burger-lines-spacing, 2);
       transform: translate(-10px, -$burger-initial-shift);
     }
   }
-}
 
-.c-burger--active {
-  &::before {
-    transform: translate(0px, 0px) rotate(-45deg);
-  }
-  &::after {
-    transform: translate(0px, 0px) rotate(45deg);
+  &.is-active {
+    &::before {
+      transform: translate(0px, 0px) rotate(-45deg);
+    }
+    &::after {
+      transform: translate(0px, 0px) rotate(45deg);
+    }
   }
 }

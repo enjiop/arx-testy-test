@@ -8,43 +8,6 @@
   max-width: rem(408px);
 }
 
-.aside-nav__item {
-  position: relative;
-  width: 100%;
-  cursor: pointer;
-
-  &:not(:last-child) {
-    margin-bottom: rem(20px);
-  }
-
-  &.-active {
-    .aside-nav__link {
-      padding-left: rem(30px);
-    }
-
-    .aside-nav__arrow {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(0px);
-    }
-  }
-
-  @include u-hocus {
-    &,
-    &.-active {
-      .aside-nav__link {
-        padding-left: rem(30px);
-      }
-
-      .aside-nav__arrow {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(0px);
-      }
-    }
-  }
-}
-
 .aside-nav .aside-nav__link {
   display: inline-block;
   color: $white;
@@ -61,4 +24,41 @@
   visibility: hidden;
   transform: translateX(-#{rem(30px)});
   transition: transform $speed $easing, opacity $speed * 1.2 $easing;
+}
+
+.aside-nav__item {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-bottom: rem(20px);
+  }
+
+  &.is-active {
+    .aside-nav__link {
+      padding-left: rem(30px);
+    }
+
+    .aside-nav__arrow {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0px);
+    }
+  }
+
+  @include u-hocus {
+    &,
+    &.is-active {
+      .aside-nav__link {
+        padding-left: rem(30px);
+      }
+
+      .aside-nav__arrow {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0px);
+      }
+    }
+  }
 }

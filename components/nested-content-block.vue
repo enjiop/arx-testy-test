@@ -2,11 +2,19 @@
   <section class="nested-content">
     <h3 class="c-heading -h5">{{ data.title }}</h3>
 
-    <div class="nested-content__body" v-if="body" v-html="body"></div>
+    <div v-if="body" class="nested-content__body" v-html="body"></div>
 
-    <component v-for="block in data.blocks" :key="block._uid" :is="block.component" :data="block" />
+    <component
+      :is="block.component"
+      v-for="block in data.blocks"
+      :key="block._uid"
+      :data="block"
+    />
 
-    <downloads-component v-if="data.downloads && data.downloads.length > 0" :downloads="data.downloads"></downloads-component>
+    <downloads-component
+      v-if="data.downloads && data.downloads.length > 0"
+      :downloads="data.downloads"
+    ></downloads-component>
 
     <base-button
       v-if="data.download && data.download.filename"
@@ -22,14 +30,14 @@ export default {
   props: {
     data: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   computed: {
     body() {
       return this.$storyapi.richTextResolver.render(this.data.body)
-    }
-  }
+    },
+  },
 }
 </script>

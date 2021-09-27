@@ -13,46 +13,32 @@ $button-horizontal-padding: 20px;
   background-color: rgba(0, 0, 0, 0);
   color: $color-main-dark-grey;
   white-space: nowrap;
-}
 
-.c-button__text {
-  font-weight: $medium;
-  font-family: $font-stolzl-medium;
-  font-size: 14px;
-  line-height: $line-height;
-  margin-right: rem(40px);
-}
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    height: $button-underline-height;
+    width: 100%;
+    left: 0;
+    background-color: $color-main-primary;
+    transition: transform $speed $easing;
+  }
 
-.c-button__arrow {
-  stroke: $color-main-primary;
-}
+  &::before {
+    bottom: ($button-underline-spacing + $button-underline-height);
+  }
 
-.c-button::before,
-.c-button::after {
-  content: '';
-  position: absolute;
-  display: block;
-  height: $button-underline-height;
-  width: 100%;
-  left: 0;
-  background-color: $color-main-primary;
-}
+  &::after {
+    bottom: 0;
+  }
 
-.c-button::before {
-  bottom: ($button-underline-spacing + $button-underline-height);
-}
+  &__arrow {
+    stroke: $color-main-primary;
+    transition: transform $speed $easing;
+  }
 
-.c-button::after {
-  bottom: 0;
-}
-
-.c-button::before,
-.c-button::after,
-.c-button__arrow {
-  transition: transform $speed $easing;
-}
-
-.c-button {
   &:hover {
     color: $color-main-dark-grey;
 
@@ -91,4 +77,12 @@ $button-horizontal-padding: 20px;
       background-color: $color-main-dark-grey;
     }
   }
+}
+
+.c-button__text {
+  font-weight: $medium;
+  font-family: $font-stolzl-medium;
+  font-size: 14px;
+  line-height: $line-height;
+  margin-right: rem(40px);
 }

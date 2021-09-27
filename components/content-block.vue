@@ -2,7 +2,7 @@
   <section class="content__section">
     <h2 class="c-heading -h3">{{ data.title }}</h2>
 
-    <div class="content__body" v-if="body" v-html="body"></div>
+    <div v-if="body" class="content__body" v-html="body"></div>
 
     <template v-for="nested in data.nested">
       <nested-content-block
@@ -10,10 +10,17 @@
         :key="nested._uid"
         :data="nested"
       ></nested-content-block>
-      <base-tabs :key="nested._uid" v-else-if="nested.component === 'Tabs'" :data="nested" />
+      <base-tabs
+        v-else-if="nested.component === 'Tabs'"
+        :key="nested._uid"
+        :data="nested"
+      />
     </template>
 
-    <downloads-component v-if="data.downloads && data.downloads.length > 0" :downloads="data.downloads"></downloads-component>
+    <downloads-component
+      v-if="data.downloads && data.downloads.length > 0"
+      :downloads="data.downloads"
+    ></downloads-component>
 
     <base-button
       v-if="data.download && data.download.filename"
@@ -29,15 +36,15 @@ export default {
   props: {
     data: {
       type: Object,
-      required: true
+      required: true,
     },
   },
 
   computed: {
     body() {
-      if (!this.data.body) return null;
+      if (!this.data.body) return null
       return this.$storyapi.richTextResolver.render(this.data.body)
     },
-  }
+  },
 }
 </script>

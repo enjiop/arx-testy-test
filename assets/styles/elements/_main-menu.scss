@@ -40,19 +40,15 @@
 
 .main-menu__page-link,
 .main-menu__block-link {
+  display: inline-block;
+  width: 100%;
+  color: $color-main-dark-grey;
   transition: color $speed $easing;
 }
 
 .main-menu__page-link:hover,
 .main-menu__block-link:hover {
   color: $color-main-primary;
-}
-
-.main-menu__page-link,
-.main-menu__block-link {
-  display: inline-block;
-  width: 100%;
-  color: $color-main-dark-grey;
 }
 
 .main-menu__block-list {

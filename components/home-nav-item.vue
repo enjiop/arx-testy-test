@@ -7,7 +7,12 @@
       :to="{ path: slug }"
       :aria-label="`Перейти на сторінку ${title}`"
     >
-      <svg class="home-nav__link-arrow" aria-hidden="true" width="13" heigth="9">
+      <svg
+        class="home-nav__link-arrow"
+        aria-hidden="true"
+        width="13"
+        heigth="9"
+      >
         <use href="icons/sprite.svg#arrow"></use>
       </svg>
     </nuxt-link>
@@ -19,24 +24,24 @@ export default {
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
 
     description: {
       type: String,
-      default: ''
+      default: '',
     },
 
     slug: {
       type: String,
-      default: ''
+      default: '',
     },
   },
 
   methods: {
     handleFocus() {
       this.$el.focus()
-    }
-  }
+    },
+  },
 }
 </script>

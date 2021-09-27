@@ -1,5 +1,5 @@
 <template>
-  <component class="-fancy" :is="tag">
+  <component :is="tag" class="-fancy">
     <span>{{ firstWord }}</span>
     {{ restWords }}
   </component>
@@ -10,13 +10,13 @@ export default {
   props: {
     tag: {
       type: String,
-      default: "span"
+      default: 'span',
     },
 
     value: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
 
   computed: {
@@ -26,7 +26,7 @@ export default {
 
     restWords() {
       return this.value.substring(this.firstWord.length)
-    }
-  }
+    },
+  },
 }
 </script>
