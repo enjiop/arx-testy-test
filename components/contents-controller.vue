@@ -22,17 +22,47 @@ export default {
   data() {
     return {
       observer: null,
-      blockInView: null
+      sectionInView: null,
+      prevYPos: 0,
+      direction: 'up'
     }
   },
 
+  computed: {
+    sections: function() {
+      return this.$refs.block.map(el => el.$el)
+    },
+  },
+
   watch: {
-    blockInView() {
-      this.$emit('block-change', this.blockInView)
+    sectionInView() {
+      this.$emit('block-change', this.sectionInView)
     }
   },
 
   methods: {
+    shouldUpdate: function(entry) {
+      if (this.direction === 'down' && !entry.isIntersecting) {
+        return true
+      }
+
+      if (this.direction === 'up' && entry.isIntersecting) {
+        return true
+      }
+
+      return false
+    },
+
+    getTargetSection: function(entry) {
+      const index = this.sections.findIndex((section) => section == entry.target)
+
+      if (index >= this.sections.length - 1) {
+        return entry.target
+      } else {
+        return this.sections[index + 1]
+      }
+    },
+
     updateHistory(hash) {
       clearTimeout(this.updateHistory.timeout);
       this.updateHistory.timeout = setTimeout(() => {
@@ -40,65 +70,40 @@ export default {
           history.pushState({}, window.title, hash);
         }
       }, 400);
+    },
+
+    intersectionObsCallback(entries) {
+      entries.forEach(entry => {
+        if (document.documentElement.scrollTop > this.prevYPos) {
+          this.direction = 'down'
+        } else {
+          this.direction = 'up'
+        }
+
+        this.prevYPos = window.scrollTop
+
+        const target = this.direction === 'down' ? this.getTargetSection(entry) : entry.target
+
+        if (this.shouldUpdate(entry)) {
+          this.sectionInView = target.id;
+          this.updateHistory('#' + target.id)
+        }
+      })
     }
   },
 
   mounted() {
-    if (!this.$refs.block) return;
-    const sections = this.$refs.block.map(el => el.$el)
-
-    let prevYPos = 0
-    let direction = 'up'
-
-    const getTargetSection = (entry) => {
-      const index = sections.findIndex((section) => section == entry.target)
-
-      if (index >= sections.length - 1) {
-        return entry.target
-      } else {
-        return sections[index + 1]
-      }
-    }
-
-    const shouldUpdate = (entry) => {
-      if (direction === 'down' && !entry.isIntersecting) {
-        return true
-      }
-
-      if (direction === 'up' && entry.isIntersecting) {
-        return true
-      }
-
-      return false
-    }
-
-    const callback = (entries) => {
-      entries.forEach(entry => {
-        if (document.documentElement.scrollTop > prevYPos) {
-          direction = 'down'
-        } else {
-          direction = 'up'
-        }
-
-        prevYPos = window.scrollTop
-
-        const target = direction === 'down' ? getTargetSection(entry) : entry.target
-
-        if (shouldUpdate(entry)) {
-          this.blockInView = target.id;
-          this.updateHistory('#' + target.id)
-        }
-      });
-    }
-
     const options = {
-      rootMargin: "-30%",
+      rootMargin: "-20%",
       threshold: 0.0
     }
 
-    this.observer = new window.IntersectionObserver(callback, options)
+    this.observer = new window.IntersectionObserver(this.intersectionObsCallback, options)
 
-    sections.forEach(section => this.observer.observe(section))
+    this.$nextTick(() => {
+      if (!this.sections) return;
+      this.sections.forEach(section => this.observer.observe(section))
+    });
   }
 }
 </script>

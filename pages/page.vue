@@ -70,13 +70,13 @@ export default {
   },
 
   computed: {
-    blocks() {
+    blocks: function() {
       if (!this.blok.blocks) return [];
       const res = this.blok.blocks.map(({ _uid, title }) => ({ _uid, title}));
       return res
     },
 
-    contentPages() {
+    contentPages: function() {
       let res = []
       this.stories.forEach(item => {
         if (item.content.component === 'page') {
@@ -118,11 +118,9 @@ export default {
   },
 
   mounted() {
-    if (window && document) {
-      this.mobileDetection()
-      window.addEventListener("resize", this.handleResize)
-      document.addEventListener("keydown", this.handleKeydown)
-    }
+    this.mobileDetection()
+    window.addEventListener("resize", this.handleResize)
+    document.addEventListener("keydown", this.handleKeydown)
   },
 
   beforeDestroy() {
@@ -130,10 +128,8 @@ export default {
   },
 
   beforeUnmount() {
-    if (window && document) {
-      window.removeEventListener("resize", this.handleResize)
-      document.removeEventListener("keydown", this.handleKeydown)
-    }
+    window.removeEventListener("resize", this.handleResize)
+    document.removeEventListener("keydown", this.handleKeydown)
   }
 }
 </script>
