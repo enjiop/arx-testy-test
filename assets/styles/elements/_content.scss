@@ -16,12 +16,9 @@
   margin-bottom: rem(20px);
 }
 
-.content__body > * {
-  margin-bottom: rem(20px);
-}
-
-.content > .content__body > *,
-.nested-content > .nested-content__body > * {
+.content__section > *,
+.nested-content > .nested-content__body > *,
+.content__section > div:not([class]) > * {
   margin-bottom: rem(20px);
 }
 
@@ -33,7 +30,7 @@
   display: inline-block;
 }
 
-.content img {
+.content picture {
   max-width: 100%;
 }
 

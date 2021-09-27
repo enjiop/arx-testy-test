@@ -42,7 +42,7 @@ export default {
 
   mounted() {
     const options = {
-      rootMargin: '-20%',
+      rootMargin: '-40%',
       threshold: 0.0,
     }
 

@@ -6,7 +6,7 @@ import {
   buildModules,
   modules,
   build,
-  transition,
+  pageTransition,
   loading,
 } from './config'
 
@@ -26,7 +26,7 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components,
 
-  transition,
+  pageTransition,
 
   loading,
 

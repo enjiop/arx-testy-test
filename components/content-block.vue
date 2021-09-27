@@ -2,11 +2,12 @@
   <section class="content__section">
     <h2 class="c-heading -h3">{{ data.title }}</h2>
 
-    <div v-if="body" class="content__body" v-html="body"></div>
+    <!-- <div v-if="body" class="content__body" v-html="body"></div> -->
+    <rich-text-renderer v-if="data.body" :document="data.body" />
 
     <template v-for="nested in data.nested">
       <nested-content-block
-        v-if="nested.component === 'Nested Block'"
+        v-if="nested.component === 'NestedBlock'"
         :key="nested._uid"
         :data="nested"
       ></nested-content-block>
@@ -37,13 +38,6 @@ export default {
     data: {
       type: Object,
       required: true,
-    },
-  },
-
-  computed: {
-    body() {
-      if (!this.data.body) return null
-      return this.$storyapi.richTextResolver.render(this.data.body)
     },
   },
 }

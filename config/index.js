@@ -5,7 +5,7 @@ import { components } from './components'
 import { buildModules } from './buildModules'
 import { modules } from './modules'
 import { build } from './build'
-import { transition } from './transition'
+import { pageTransition } from './transition'
 import { loading } from './loading'
 
 export {
@@ -16,6 +16,6 @@ export {
   buildModules,
   modules,
   build,
-  transition,
+  pageTransition,
   loading,
 }

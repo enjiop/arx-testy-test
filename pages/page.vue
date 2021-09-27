@@ -59,6 +59,7 @@ export default {
       isMobile: false,
     }
   },
+
   head() {
     return (
       this.blok && {
