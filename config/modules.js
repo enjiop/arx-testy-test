@@ -5,6 +5,7 @@ export const modules = [
     {
       accessToken: 'ZxuUnJFWgtgnrWDLYbUYWQtt',
       cacheProvider: 'memory',
-    },
+      version: process.env.NODE_ENV === 'production' ? 'published' : 'draft'
+    }
   ],
 ]
