@@ -1,6 +1,6 @@
 pipelines:
   branches:
-    test/deploy:
+    master:
     - step:
         services:
           - docker
