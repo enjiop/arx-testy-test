@@ -12,11 +12,13 @@ import {
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
-  ssr: false,
-  // generate: {
-  //   fallback: true
-  // },
+  target: 'universal',
+  // ssr: false,
+
+  server: {
+    host: '0.0.0.0',
+    port: 3000
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head,

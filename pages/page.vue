@@ -4,6 +4,7 @@
     <mobile-overlay v-if="isMobile"></mobile-overlay>
 
     <template v-else>
+      <main-menu ref="menu" :is-open="isMenuOpen" :data="contentPages" />
       <button
         class="c-burger"
         :aria-expanded="isMenuOpen"
@@ -20,7 +21,6 @@
         :description="blok.description"
         :current-block-uid="currentBlockId"
       />
-      <main-menu ref="menu" :is-open="isMenuOpen" :data="contentPages" />
       <main id="main" class="main">
         <home-content
           v-if="blok.component === 'home_page'"
@@ -71,8 +71,7 @@ export default {
   computed: {
     blocks() {
       if (!this.blok.blocks) return []
-      const res = this.blok.blocks.map(({ _uid, title }) => ({ _uid, title }))
-      return res
+      return this.blok.blocks.map(({ _uid, title }) => ({ _uid, title }))
     },
 
     contentPages() {
