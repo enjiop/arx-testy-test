@@ -1,0 +1,16 @@
+pipelines:
+  branches:
+    master:
+    - step:
+        services:
+          - docker
+        script: # Modify the commands below to build your repository.
+          - curl https://cli-assets.heroku.com/install.sh | sh
+          - heroku container:login
+          - heroku container:push web -a $HEROKU_APP_NAME
+          - heroku container:release web -a $HEROKU_APP_NAME
+    - step:
+        name: url
+        script:
+          - echo https://arx-design.herokuapp.com/
+
