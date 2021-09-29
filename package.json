@@ -6,7 +6,7 @@
     "development": "cross-env NODE_ENV=development nuxt",
     "dev": "npm run development",
     "production": "cross-env NODE_ENV=production nuxt build",
-    "build": "npm run production",
+    "build": "npm run production && npm run start",
     "start": "nuxt start",
     "generate": "cross-env NODE_ENV=production nuxt generate",
     "stylelint": "stylelint **/*.{css,vue}",
