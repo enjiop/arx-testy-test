@@ -5,7 +5,7 @@ pipelines:
         services:
           - docker
         script: # Modify the commands below to build your repository.
-          - git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_DEV.git HEAD:master
+          - git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
      #     - curl https://cli-assets.heroku.com/install.sh | sh
      #     - heroku container:login
      #     - heroku container:push web -a $HEROKU_APP_NAME
